@@ -6,10 +6,10 @@ This package exports TypeScript source. Your bundler must compile TSX and proces
 
 ## Use
 
-Pin the verified public commit `e4054d2df9903274705ee8989e93f80a97020a99` across consumers:
+Pin the verified public commit `6cff1dee0da345c1784d483ec4d8d759ee08dc21` across consumers:
 
 ```sh
-bun add 'github:vaayne/agent-ui#e4054d2df9903274705ee8989e93f80a97020a99'
+bun add 'github:vaayne/agent-ui#6cff1dee0da345c1784d483ec4d8d759ee08dc21'
 ```
 
 ```tsx
