@@ -6,10 +6,10 @@ This package exports TypeScript source. Your bundler must compile TSX and proces
 
 ## Use
 
-Replace FULL_PUBLIC_COMMIT_SHA after the public repository has a verified commit:
+Pin the verified public commit `e4054d2df9903274705ee8989e93f80a97020a99` across consumers:
 
 ```sh
-bun add 'github:vaayne/agent-ui#FULL_PUBLIC_COMMIT_SHA'
+bun add 'github:vaayne/agent-ui#e4054d2df9903274705ee8989e93f80a97020a99'
 ```
 
 ```tsx
