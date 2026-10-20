@@ -1,5 +1,6 @@
 /* Keep the stock preset separate from the shared theme. */
 @import "./shadcn.css";
+@import "@fontsource-variable/geist";
 @source "../ui";
 @source "../agent";
 
@@ -188,6 +189,9 @@ a {
 }
 
 @theme inline {
+  --font-sans: "Geist Variable", sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
+
   --color-success: var(--success);
   --color-success-subtle: var(--success-3);
   --color-warning: var(--warning);
