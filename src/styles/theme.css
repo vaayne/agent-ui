@@ -1,0 +1,209 @@
+/* Keep the stock preset separate from the shared theme. */
+@import "./shadcn.css";
+@source "../ui";
+@source "../agent";
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  text-underline-position: from-font;
+  text-decoration-skip-ink: auto;
+}
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+label:has(input),
+a {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Theme changes must update all colors in one paint. */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Colors follow Radix Colors (radix-ui.com/colors). They override the colors
+ * of the shadcn preset; the preset still sets style, fonts and radius.
+ *
+ * The reference palette uses aqua #04e0e7 and gray #88929a.
+ * Regenerate them at
+ * https://www.radix-ui.com/colors/custom?accent-light=04E0E7&gray-light=88929A&accent-dark=04E0E7&gray-dark=88929A
+ * (backgrounds #fff and #111). success, warning and danger are the stock
+ * grass, amber and red scales.
+ *
+ * Each step has one use. 1-2: page and sidebar backgrounds. 3-5: component
+ * backgrounds (normal, hover, selected). 6-8: borders (separator, control,
+ * hover and focus). 9-10: solid fills (normal, hover). 11-12: text (low and
+ * high contrast). Brand 9 is light, so text on it uses --brand-contrast. */
+:root {
+  --gray-1: #fbfcfd;
+  --gray-2: #f7f9fb;
+  --gray-3: #eef1f3;
+  --gray-4: #e5e9ec;
+  --gray-5: #dde2e6;
+  --gray-6: #d5dbe0;
+  --gray-7: #c8d0d6;
+  --gray-8: #b3bdc5;
+  --gray-9: #858f97;
+  --gray-10: #7b858c;
+  --gray-11: #5d656c;
+  --gray-12: #1b2024;
+
+  --brand-1: #f7feff;
+  --brand-2: #effcfc;
+  --brand-3: #d6fafb;
+  --brand-4: #bef5f7;
+  --brand-5: #a4eef0;
+  --brand-6: #88e2e6;
+  --brand-7: #5fd3d8;
+  --brand-8: #00bfc6;
+  --brand-9: #2feef5;
+  --brand-10: #16e3ea;
+  --brand-11: #007a80;
+  --brand-12: #004548;
+  --brand-contrast: #032729;
+
+  --success-3: #e9f6e9;
+  --success-11: #2a7e3b;
+  --warning-3: #fff7c2;
+  --warning-11: #ab6400;
+  --danger-3: #feebec;
+  --danger-11: #ce2c31;
+
+  --surface: #fff;
+}
+
+/* Dark changes only the scale values. The mapping block below comes later
+ * than the preset .dark, so the preset colors do not apply. */
+.dark {
+  --gray-1: #0f1113;
+  --gray-2: #181a1b;
+  --gray-3: #212325;
+  --gray-4: #272a2d;
+  --gray-5: #2d3235;
+  --gray-6: #363b3f;
+  --gray-7: #43494e;
+  --gray-8: #596269;
+  --gray-9: #677078;
+  --gray-10: #747e85;
+  --gray-11: #adb5bc;
+  --gray-12: #edeef0;
+
+  --brand-1: #071414;
+  --brand-2: #0b1c1c;
+  --brand-3: #002e30;
+  --brand-4: #003c3f;
+  --brand-5: #00494d;
+  --brand-6: #00585c;
+  --brand-7: #006b70;
+  --brand-8: #00848a;
+  --brand-9: #04e0e7;
+  --brand-10: #00d5dc;
+  --brand-11: #00d5dc;
+  --brand-12: #aff2f5;
+
+  --success-3: #1b2a1e;
+  --success-11: #71d083;
+  --warning-3: #302008;
+  --warning-11: #ffca16;
+  --danger-3: #3b1219;
+  --danger-11: #ff9592;
+
+  /* Raised surfaces are lighter than the page in dark mode. */
+  --surface: var(--gray-2);
+}
+
+/* The shadcn tokens. They are declared on .dark too, so that a nested .dark
+ * subtree computes them from the dark scales. */
+:root,
+.dark {
+  --background: var(--gray-1);
+  --foreground: var(--gray-12);
+  --card: var(--surface);
+  --card-foreground: var(--gray-12);
+  --popover: var(--surface);
+  --popover-foreground: var(--gray-12);
+  --primary: var(--gray-12);
+  --primary-foreground: var(--gray-1);
+  --secondary: var(--gray-3);
+  --secondary-foreground: var(--gray-12);
+  --muted: var(--gray-3);
+  --muted-foreground: var(--gray-11);
+  --accent: var(--gray-3);
+  --accent-foreground: var(--gray-12);
+  --destructive: var(--danger-11);
+  --border: var(--gray-6);
+  --input: var(--gray-7);
+  --ring: var(--brand-8);
+  --success: var(--success-11);
+  --warning: var(--warning-11);
+  /* One hue in several steps: the series stay apart in every color vision. */
+  --chart-1: var(--brand-9);
+  --chart-2: var(--brand-11);
+  --chart-3: var(--gray-9);
+  --chart-4: var(--brand-6);
+  --chart-5: var(--gray-12);
+  --sidebar: var(--gray-2);
+  --sidebar-foreground: var(--gray-12);
+  --sidebar-primary: var(--gray-12);
+  --sidebar-primary-foreground: var(--gray-1);
+  --sidebar-accent: var(--gray-4);
+  --sidebar-accent-foreground: var(--gray-12);
+  --sidebar-border: var(--gray-6);
+  --sidebar-ring: var(--brand-8);
+}
+
+@theme inline {
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-3);
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-3);
+  --color-destructive-subtle: var(--danger-3);
+  --color-brand-1: var(--brand-1);
+  --color-brand-2: var(--brand-2);
+  --color-brand-3: var(--brand-3);
+  --color-brand-4: var(--brand-4);
+  --color-brand-5: var(--brand-5);
+  --color-brand-6: var(--brand-6);
+  --color-brand-7: var(--brand-7);
+  --color-brand-8: var(--brand-8);
+  --color-brand-9: var(--brand-9);
+  --color-brand-10: var(--brand-10);
+  --color-brand-11: var(--brand-11);
+  --color-brand-12: var(--brand-12);
+  --color-brand-contrast: var(--brand-contrast);
+}

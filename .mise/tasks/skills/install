@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#MISE description="Install the shadcn skill at the generated UI release"
+set -euo pipefail
+gh skill install shadcn-ui/ui shadcn --pin 'shadcn@4.22.1' --dir .agents/skills --force

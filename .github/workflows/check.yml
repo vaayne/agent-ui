@@ -1,0 +1,40 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: jdx/mise-action@v5.1.2
+        with:
+          install: true
+          cache: true
+      - run: mise run install
+      - run: mise run check
+      - run: mise run check:package
+      - run: git diff --check
+      - run: mise run test:browser
+      - uses: actions/upload-artifact@v6.0.0
+        if: always()
+        with:
+          name: browser-evidence
+          path: |
+            .local/browser/
+            .local/package-proof/report.json
+            .local/package-proof/commands.json
+          include-hidden-files: true
+          if-no-files-found: error

@@ -1,0 +1,49 @@
+[tools]
+bun = "1.4.3"
+node = "26.11.1"
+dprint = "0.63.0"
+prek = "0.5.5"
+
+[tasks.install]
+description = "Install locked dependencies"
+run = "bun install --frozen-lockfile"
+
+[tasks.format]
+description = "Format owned source and metadata"
+run = ["dprint fmt", "bunx --no-install vp fmt"]
+
+[tasks.check]
+description = "Check metadata, generated sources, source types, and demo build"
+run = [
+  "prek validate-config prek.toml",
+  "dprint check",
+  "mise run check:generated",
+  "bunx --no-install vp check",
+  "bunx --no-install tsc --noEmit",
+  "mise run build",
+]
+
+[tasks.build]
+description = "Build the demo from package source"
+run = "bunx --no-install vp build"
+
+[tasks.dev]
+description = "Serve the local demo"
+run = "bunx --no-install vp dev"
+
+[tasks."hooks:install"]
+description = "Install the local pre-commit hook"
+run = "prek install"
+
+[tasks."test:browser"]
+description = "Build and test demo flows in real Chrome"
+depends = ["build"]
+run = "node tools/browser.mjs"
+
+[tasks."check:generated"]
+description = "Verify stock source provenance and package import paths"
+run = "node tools/stock-ui.mjs check"
+
+[tasks."check:package"]
+description = "Install and build a separate consumer from the source archive"
+run = "node tools/check-package.mjs"
